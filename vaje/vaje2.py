@@ -7,21 +7,6 @@ def euclid(m, n):
         m, n = n, m % n
     return m
 
-def exteuclid(m, n):
-    """
-    Razširjeni Evklidov algoritem.
-
-    Vrača (g, a, b), kjer je g = gcd(m, n) in g = a*m + b*n.
-    Če je g = 1, velja a mod n = m^-1 mod n in b mod m = n^-1 mod m.
-    """
-    p, q, r, s = 1, 0, 0, 1
-    while n != 0:
-        k = m//n
-        m, n = n, m - k*n
-        p, q = q, p - k*q
-        r, s = s, r - k*s
-    return (m, p, r)
-
 def karatsuba(m, n, b):
     """Množenje z metodo deli in vladaj"""
     if b == 0:
