@@ -36,6 +36,7 @@ def select(l, k):
     Pri tem lahko preuredi elemente v seznamu l.
     """
     a, b = 0, len(l) - 1
+    assert a <= k and k <= b
     while a < b:
         pivot = l[k]
         i, j = a, b
@@ -62,10 +63,22 @@ def find(x, get):
     do katerega lahko dostopamo s pomočjo funkcije get.
     Algoritem teče v času O(log n),
     kjer je n dejanska dolžina seznama.
+
+    V primerjavi z algoritmom z vaj je tukaj spremenjena prva zanka,
+    ki premika tudi levo krajišče intervala in se ustavi,
+    če najde interval, ki lahko vsebuje iskani element.
     """
     a, b = 0, 1
-    while get(b) is not None:
-        b *= 2
+    z = get(b)
+    while z is not None:
+        if x < z:
+            b -= 1
+            break
+        elif x == z:
+            return b
+        else:
+            a, b = b + 1, 2 * b
+            z = get(b)
     while a < b:
         c = (a + b) // 2
         z = get(c)
