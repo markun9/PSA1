@@ -93,3 +93,19 @@ def find(x, get):
         return a
     else:
         return None
+
+def bucketSort(l):
+    """
+    Urejanje seznama celih števil v času O(n + M),
+    kjer je M razlika med največjim in najmanjšim elementom seznama.
+    """
+    a = min(l)
+    b = max(l)
+    M = b - a + 1
+    c = [0] * M
+    for x in l:
+        c[x - a] += 1
+    s = []
+    for i in range(M):
+        s += [i + a] * c[i]
+    return s
