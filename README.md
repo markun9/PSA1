@@ -7,6 +7,6 @@ Repozitorij z gradivi pri predmetu Podatkovne strukture in algoritmi 1 (izbirni 
 
 Imenik *vaje* vsebuje kodo v Pythonu, ki smo jo srečali na vajah.
 
-* V veji *master*  se nahaja koda, ki se je pojavila v navodilih nalog.
+* V veji *original*  se nahaja koda, ki se je pojavila v navodilih nalog.
 * V veji *resitve-vaje* se nahaja koda, ki jo napišemo na vajah.
-* V veji *resitve* se nahajajo "uradne" rešitve, ki jih ne uspemo obdelati na vajah.
+* V veji *resitve* se nahajajo "uradne" rešitve, ki jih ne uspemo obdelati na vajah. Ta veja bo navadno združena v vejo *master*.
