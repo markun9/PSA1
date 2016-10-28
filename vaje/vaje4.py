@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from vaje3 import Queue
 
 def queueMerge(l):
@@ -57,7 +58,7 @@ def select(l, k):
 
 def find(x, get):
     """
-    Bisekcija na seznamu neznane dolžine.
+    Bisekcija na urejenem seznamu neznane dolžine.
 
     Poišče indeks elementa x v seznamu neznane dolžine,
     do katerega lahko dostopamo s pomočjo funkcije get.
