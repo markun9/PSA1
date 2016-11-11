@@ -58,3 +58,55 @@ def DFS(G, roots = None, previsit = nothing, postvisit = nothing):
         if not explore(u):
             return False
     return True
+
+def dvodelen(G, DFS = DFS):
+    """
+    Če je graf G dvodelen, vrne 2-barvanje grafa.
+    V nasprotnem primeru vrne None.
+
+    Časovna zahtevnost: O(m)
+    """
+    barva = [None] * len(G)
+    def previsit(u, v):
+        """
+        Pobarva vozlišče z drugačno barvo kot predhodnik,
+        nato pa preveri, ali ima kak sosed že isto barvo.
+
+        Časovna zahtevnost: O(d(u))
+        """
+        if v is None:
+            barva[u] = 0
+        else:
+            barva[u] = 1 - barva[v]
+        return all(barva[w] != barva[u] for w in G[u] if barva[w] is not None)
+    if not DFS(G, previsit = previsit):
+        return False
+    return barva
+
+def treeMax(T, r, x, DFS = DFS):
+    z = [None] * len(T)
+    def postvisit(u, v):
+        z[u] = max([z[w] for w in T[u] if w != v] + [x[u]])
+        return True
+    DFS(T, roots = [r], postvisit = postvisit)
+    return z
+
+def edgeCycle(G, x, y, DFS = DFS):
+    pody = False
+    cikel = False
+    def previsit(u, v):
+        nonlocal pody, cikel
+        if u == y:
+            if v != x:
+                cikel = True
+                return False
+            pody = True
+        elif pody:
+            if x in G[u]:
+                cikel = True
+                return False
+        return True
+    def postvisit(u, v):
+        return u != y
+    DFS(G, roots = [x], previsit = previsit, postvisit = postvisit)
+    return cikel
