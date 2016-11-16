@@ -7,6 +7,7 @@ m število povezav v grafu, d(u) pa število sosedov vozlišča u.
 Pri tem predpostavljamo, da velja n = O(m)
 (graf ima O(1) povezanih komponent).
 """
+from vaje3 import Stack
 
 def nothing(u, v = None):
     """
@@ -59,6 +60,39 @@ def DFS(G, roots = None, previsit = nothing, postvisit = nothing):
             return False
     return True
 
+def iterDFS(G, roots = None, previsit = nothing, postvisit = nothing):
+    """
+    Rekurzivno iskanje v globino.
+
+    Argumenti so enaki kot pri funkciji DFS.
+
+    Časovna zahtevnost: O(m) + O(n) klicev funkcij previsit in postvisit
+    """
+    s = Stack()
+    n = len(G)
+    visited = [False] * n
+    if roots is None:
+        roots = range(n)
+    v, it = None, iter(roots)
+    while True:
+        try:
+            u = next(it)
+        except StopIteration:
+            if v is None:
+                return True
+            u = v
+            v, it = s.pop()
+            if not postvisit(u, v):
+                return False
+            continue
+        if visited[u]:
+            continue
+        visited[u] = True
+        if not previsit(u, v):
+            return False
+        s.push((v, it))
+        v, it = u, iter(G[u])
+
 def dvodelen(G, DFS = DFS):
     """
     Če je graf G dvodelen, vrne 2-barvanje grafa.
@@ -84,17 +118,44 @@ def dvodelen(G, DFS = DFS):
     return barva
 
 def treeMax(T, r, x, DFS = DFS):
+    """
+    Za drevo T s korenom r vrne seznam,
+    ki za vsako vozlišče u poda največjo vrednost iz seznama x,
+    ki ustreza kakemu vozlišču iz poddrevesa s korenom u.
+
+    Časovna zahtevnost: O(n)
+    """
+    assert len(T) == len(x)
     z = [None] * len(T)
     def postvisit(u, v):
+        """
+        Nastavi vrednost za trenutno vozlišče
+        kot maksimum znanih vrednosti sosedov in x[u].
+
+        Časovna zahtevnost: O(d(u))
+        """
         z[u] = max([z[w] for w in T[u] if w != v] + [x[u]])
         return True
     DFS(T, roots = [r], postvisit = postvisit)
     return z
 
 def edgeCycle(G, x, y, DFS = DFS):
+    """
+    Preveri, ali povezava xy v grafu G leži na kakem ciklu.
+
+    Časovna zahtevnost: O(m)
+    """
+    assert x in G[y] and y in G[x]
     pody = False
     cikel = False
     def previsit(u, v):
+        """
+        Če sreča vozlišče y, preveri, ali je njegov predhodnik x.
+        Če je bilo vozlišče y že obiskano, preveri,
+        ali je trenutno vozlišče sosedno vozlišču x.
+
+        Časovna zahtevnost: O(d(u))
+        """
         nonlocal pody, cikel
         if u == y:
             if v != x:
@@ -107,6 +168,45 @@ def edgeCycle(G, x, y, DFS = DFS):
                 return False
         return True
     def postvisit(u, v):
+        """
+        Če sreča vozlišče y, prekine iskanje.
+
+        Časovna zahtevnost: O(1)
+        """
         return u != y
     DFS(G, roots = [x], previsit = previsit, postvisit = postvisit)
     return cikel
+
+def ancestorLabel(T, r, l, DFS = DFS):
+    """
+    Za drevo T s korenom r vrne seznam,
+    ki za vsako vozlišče u poda vrednost iz seznama l,
+    ki ustreza l[u]-predhodniku vozlišča u
+    (tj., vozlišču, ki je za l[u] stopenj višje od u na poti do r,
+    pri čemer za predhodnika korena r vzamemo kar sam r).
+
+    Časovna zahtevnost: O(n)
+    """
+    assert len(T) == len(l)
+    assert all(x >= 0 for x in l)
+    z = [None] * len(T)
+    s = []
+    def previsit(u, v = None):
+        """
+        Doda vozlišče na sklad in mu nastavi novo oznako.
+
+        Časovna zahtevnost: O(1)
+        """
+        s.append(u)
+        z[u] = l[s[-(1 + l[u])]] if l[u] < len(s) else l[r]
+        return True
+    def postvisit(u, v = None):
+        """
+        Odstrani vozlišče s sklada.
+
+        Časovna zahtevnost: O(1)
+        """
+        s.pop()
+        return True
+    DFS(T, roots = [r], previsit = previsit, postvisit = postvisit)
+    return z
