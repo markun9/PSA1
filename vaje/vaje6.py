@@ -7,6 +7,7 @@ m število povezav v grafu, d(u) pa število sosedov vozlišča u.
 Pri tem predpostavljamo, da velja n = O(m)
 (graf ima O(1) povezanih komponent).
 """
+from vaje3 import Stack
 from vaje5 import DFS
 
 def reverseGraph(G):
@@ -73,3 +74,31 @@ def decompose(G, DFS = DFS):
         return True
     DFS(G, roots = reversed(post), previsit = previsit, postvisit = postvisit)
     return (comp, [list(s) for s in M])
+
+def toporder(G):
+    n = len(G)
+    stopnje = [0] * n
+    for g in G:
+        for v in g:
+            stopnje[v] += 1
+    s = Stack()
+    for i in range(n):
+        if stopnje[i] == 0:
+            s.push(i)
+    topord = []
+    while len(s) > 0:
+        v = s.pop()
+        topord.append(v)
+        for u in G[v]:
+            stopnje[u] -= 1
+            if stopnje[u] == 0:
+                s.push(u)
+    return topord
+
+def reverse(G):
+    n = len(G)
+    V = [[] for i in range(n)]
+    for i in range(n):
+        for j in G[i]:
+            V[j].append(i)
+    return V
