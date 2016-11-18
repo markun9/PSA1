@@ -94,3 +94,12 @@ def toporder(G):
             if stopnje[u] == 0:
                 s.push(u)
     return topord
+
+def semestri(G):
+    n = len(G)
+    s = [1] * n
+    for u in toporder(G):
+        for v in G[u]:
+            if s[v] <= s[u]:
+                s[v] = s[u] + 1
+    return (max(s), s)
