@@ -10,18 +10,18 @@ Pri tem predpostavljamo, da velja n = O(m)
 from vaje3 import Stack
 from vaje5 import DFS
 
-def reverseGraph(G):
+def reverse(G):
     """
     Vrne graf, katerega povezave so ravno nasprotne povezavam iz G.
 
     Časovna zahtevnost: O(m)
     """
     n = len(G)
-    R = [[] for u in range(n)]
-    for u in range(n):
-        for v in G[u]:
-            R[v].append(u)
-    return R
+    V = [[] for i in range(n)]
+    for i in range(n):
+        for j in G[i]:
+            V[j].append(i)
+    return V
 
 def decompose(G, DFS = DFS):
     """
@@ -32,7 +32,7 @@ def decompose(G, DFS = DFS):
     Časovna zahtevnost: O(m)
     """
     n = len(G)
-    R = reverseGraph(G)
+    R = reverse(G)
     post = []
     def postorder(u, v):
         """
@@ -94,11 +94,3 @@ def toporder(G):
             if stopnje[u] == 0:
                 s.push(u)
     return topord
-
-def reverse(G):
-    n = len(G)
-    V = [[] for i in range(n)]
-    for i in range(n):
-        for j in G[i]:
-            V[j].append(i)
-    return V
