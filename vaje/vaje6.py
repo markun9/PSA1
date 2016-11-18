@@ -103,7 +103,14 @@ def toporder(G):
     return topord
 
 def semestri(G):
+    """
+    Vrne najmanjše število semestrov, potrebnih za dokončanje študija,
+    in seznam s prvim semestrom, v katerem lahko opravljamo določen predmet.
+
+    Časovna zahtevnost: O(m)
+    """
     n = len(G)
+    assert n > 0
     s = [1] * n
     for u in toporder(G):
         for v in G[u]:
