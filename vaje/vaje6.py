@@ -76,6 +76,11 @@ def decompose(G, DFS = DFS):
     return (comp, [list(s) for s in M])
 
 def toporder(G):
+    """
+    Topološko urejanje usmerjenega acikličnega grafa z odstranjevanjem izvorov.
+
+    Časovna zahtevnost: O(m)
+    """
     n = len(G)
     stopnje = [0] * n
     for g in G:
@@ -93,9 +98,16 @@ def toporder(G):
             stopnje[u] -= 1
             if stopnje[u] == 0:
                 s.push(u)
+    if len(topord) < n:
+        raise ValueError("Graf ima cikle!")
     return topord
 
 def reverse(G):
+    """
+    Vrne graf, katerega povezave so ravno nasprotne povezavam iz G.
+
+    Časovna zahtevnost: O(m)
+    """
     n = len(G)
     V = [[] for i in range(n)]
     for i in range(n):
