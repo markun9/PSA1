@@ -14,6 +14,7 @@ s pomočjo sedmih produktov
 * *P5 = (A + D) (E + H)*,
 * *P6 = (B - D) (G + H)* in
 * *P7 = (A - C) (E + F)*.
+
 Produkt potem izračunamo kot
 ```
                   X*Y =
@@ -24,7 +25,7 @@ Vaša naloga bo implementacija Strassenovega algoritma v programskem jeziku *Pyt
 
 ## Orodja
 
-Za izdelavo naloge boste uporabili git repozitorij, ki bo kopija (*fork*) repozitorija predmeta na [GitHub](https://github.com/jaanos/PSA1)u oziroma [Bitbicket](https://bitbucket.org/jaanos/psa1)u. Toplo priporočam, da si naredite novo vejo (*branch*) ter vse delo v zvezi z nalogo poteka v tej veji (seveda lahko po potrebi naredite še več vej). Vse vaše spremembe naj bodo v mapi `naloge/2016/dn1/matrix/ImePriimek`, kjer `ImePriimek` nadomestite s svojim imenom in priimkom. Ko boste z nalogo zaključili, boste naredili *pull request* svoje veje na originalni repozitorij, potem pa bom vaše spremembe potegnil vanj.
+Za izdelavo naloge boste uporabili git repozitorij, ki bo kopija (*fork*) repozitorija predmeta na [GitHub](https://github.com/jaanos/PSA1)u oziroma [Bitbucket](https://bitbucket.org/jaanos/psa1)u. Toplo priporočam, da si naredite novo vejo (*branch*) ter vse delo v zvezi z nalogo poteka v tej veji (seveda lahko po potrebi naredite še več vej). Vse vaše spremembe naj bodo v mapi `naloge/2016/dn1/matrix/ImePriimek`, kjer `ImePriimek` nadomestite s svojim imenom in priimkom. Ko boste z nalogo zaključili, boste naredili *pull request* svoje veje na originalni repozitorij, potem pa bom vaše spremembe potegnil vanj.
 
 Morebitnih drugih predlogov in izboljšav, ki se ne tičejo naloge, prosim ne vključujte v vejo z nalogo. So pa seveda takšni predlogi dobrodošli, le v svoji veji naj bodo. Izboljšav implementacije matrik (glej spodaj) trenutno sicer ne bom sprejemal.
 
@@ -44,9 +45,11 @@ Priložen je modul `matrix` z razredom `AbstractMatrix`, ki implementira osnovne
 Natančnejša dokumentacija je na voljo v komentarjih v modulu [`matrix.py`](matrix/matrix.py).
 
 V razredu `AbstractMatrix` je definirana tudi funkcija `multiply`, ki pa ni implementirana. Ta dobi na vhod dve matriki, njun produkt pa naj zapiše v matriko, na kateri je bila klicana. Vaša naloga bo torej, da napišete nekaj podrazredov razreda `AbstractMatrix`, ki bodo čim bolj učinkovito implementirali to metodo.
+
 1. Razred `SlowMatrix` naj v metodi `multiply` implementira naivno množenje matrik.
 2. Razred `FastMatrix` naj v metodi `multiply` implementira varianto Strassenovega algoritma, ki bo delovala za matrike poljubnih velikosti.
 3. Razred `CheapMatrix` naj v metodi `multiply` implementira varianto Strassenovega algoritma, ki bo delovala za matrike poljubnih velikosti, poleg tega pa sme porabiti le O(log(*kmn*)) dodatnega prostora (poleg vhodnih matrik), kjer sta matriki, ki ju množimo, dimenzij *k × m* in *m × n*. V ta namen naj ima metoda še en neobvezen argument z delovno matriko, katere dimenzije naj bodo enake dimenzijam ciljne matrike (če ta ni podana, sme metoda ustvariti svojo). Metoda sme med delovanjem spreminjati vhodne matrike, a mora ob vrnitvi povrniti prvotno stanje (za delovno matriko to ni potrebno).
+
 *Namig*: če v rekurziji srečaš matriko z lihim številom vrstic oziroma stolpcev, izvedi rekurzijo na podmatrikah enakih dimenzij ter zadnjo vrstico oziroma stolpec obravnavaj posebej.
 
 V podrazredih z implementirano metodo `multiply` bo potem na voljo sledeča dodatna funkcionalnost:
@@ -77,6 +80,7 @@ Poskrbite, da bo koda berljiva in komentirana.
 ## Poročilo
 
 Napišite tudi poročilo, v katerega vključite sledeče:
+
 1. Kratek opis vaših algoritmov.
 2. Natančna analiza časovne in prostorske zahtevnosti vaših algoritmov v odvisnosti od dimenzij vhodnih matrik.
 3. Primerjava dejanskih časov izvajanja vaših algoritmov pri vhodih različnih velikosti.
