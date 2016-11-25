@@ -318,7 +318,7 @@ class AbstractMatrix:
         Podmatrika ima dostop do podatkov matrike, iz katere je izpeljana
         -- spreminjanje podmatrike torej spremeni tudi originalno matriko.
 
-        Indeksi vrstic in stolpev gredo od 0 do n-1,
+        Indeksi vrstic in stolpcev gredo od 0 do n-1,
         kjer je n število vrstic oziroma stolpcev.
         Negativni indeksi niso podprti.
         """
