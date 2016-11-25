@@ -7,6 +7,7 @@ Na predavanjih ste spoznali Strassenov algoritem za množenje matrik
 [ C D ]    [ G H ]
 ```
 s pomočjo sedmih produktov
+
 * *P1 = A (F - H)*,
 * *P2 = (A + B) H*,
 * *P3 = (C + D) E*,
@@ -32,6 +33,7 @@ Morebitnih drugih predlogov in izboljšav, ki se ne tičejo naloge, prosim ne vk
 ## Implementacija
 
 Priložen je modul `matrix` z razredom `AbstractMatrix`, ki implementira osnovne funkcionalnosti matrike. Naj bosta `M` in `N` matriki razreda `AbstractMatrix`. Na voljo je sledeča funkcionalnost:
+
 * `M[i, j]` vrne vrednost v vrstici `i` in stolpcu `j`.
 * `M[i:k, j:l]` vrne *podmatriko* z vrsticami od `i` do `k-1` in stolpci od `j` do `l-1`. Spreminjanje podmatrike vpliva na originalno matriko. Mogoče je uporabiti tudi druge oblike rezin oziroma rezino na eni dimenziji nadomestiti s številom.
 * `M[i:k, j:l] = N` prepiše vrednosti v navedeni podmatriki z istoležnimi vrednostmi v matriki `N`. Tako kot prej je mogoče rezine nadomestiti tudi s posameznimi indeksi; na desni lahko matriko nadomestimo s skalarjem.
@@ -53,6 +55,7 @@ V razredu `AbstractMatrix` je definirana tudi funkcija `multiply`, ki pa ni impl
 *Namig*: če v rekurziji srečaš matriko z lihim številom vrstic oziroma stolpcev, izvedi rekurzijo na podmatrikah enakih dimenzij ter zadnjo vrstico oziroma stolpec obravnavaj posebej.
 
 V podrazredih z implementirano metodo `multiply` bo potem na voljo sledeča dodatna funkcionalnost:
+
 * `M * N` vrne novo matriko s produktom matrik `M` in `N` (ustvari se nova matrika `P` in na njej kliče `P.multiply(M, N)`).
 * `M *= N` z desne primnoži matriko `N` k matriki `M` (ustvari se nova matrika s produktom, nato pa se prepiše matrika `M`).
 
