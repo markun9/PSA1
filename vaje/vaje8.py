@@ -38,3 +38,21 @@ def BFS(G, root, visit = nothing):
             visited[w] = True
             q.enqueue((w, u))
     return True
+
+def dvodelen(G):
+    n = len(G)
+    sez = [None] * n
+    def visit(u, v):
+        if v is None:
+            sez[u] = True
+        else:
+            sez[u] = not sez[v]
+        for w in G[u]:
+            if sez[w] is sez[u]:
+                return False
+            return True
+    for u in range(n):
+        if sez[u] is None:
+            if not BFS(G, u, visit = visit):
+                return False
+    return sez
