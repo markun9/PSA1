@@ -56,3 +56,20 @@ def dvodelen(G):
             if not BFS(G, u, visit = visit):
                 return False
     return sez
+
+def stPoti(G, x, y):
+    n = len(G)
+    S = [0] * n
+    nivo = [None] * n
+    S[x], nivo[x] = 1, 0
+    def visit(u, v):
+        if u == y:
+            return False
+        for w in G[u]:
+            if nivo[w] is None:
+                nivo[w] = nivo[u] + 1
+            if nivo[w] > nivo[u]:
+                S[w] += S[u]
+        return True
+    BFS(G, x, visit = visit)
+    return S[y]
