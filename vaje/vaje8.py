@@ -92,3 +92,41 @@ def stPoti(G, x, y):
         return True
     BFS(G, x, visit = visit)
     return S[y]
+
+def girth(G):
+    """
+    Določi ožino grafa G, tj. dolžino najkrajšega cikla.
+
+    Za vsako vozlišče naredi iskanje v širino,
+    pri čemer se ustavi pri največji globini,
+    ki bi še lahko dala krajši cikel od nazadnje najdenega.
+
+    Časovna zahtevnost: O(mn)
+    """
+    n = len(G)
+    najkrajsi = n + 1
+    for u in range(len(G)):
+        nivo = {u}
+        dosezena = {u}
+        globina = 1
+        while 2*globina <= najkrajsi:
+            naslednji = set()
+            for v in nivo:
+                for w in G[v]:
+                    if w < u:
+                        continue
+                    if w not in dosezena:
+                        dosezena.add(w)
+                        naslednji.add(w)
+                    elif w in nivo:
+                        najkrajsi = 2*globina - 1
+                        break
+                    elif w in naslednji:
+                        najkrajsi = 2*globina
+                if najkrajsi == 2*globina - 1:
+                    break
+            nivo = naslednji
+            globina += 1
+    if najkrajsi > n:
+        return float('inf')
+    return najkrajsi
