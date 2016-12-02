@@ -40,6 +40,13 @@ def BFS(G, root, visit = nothing):
     return True
 
 def dvodelen(G):
+    """
+    Če je graf G dvodelen, vrne 2-barvanje grafa.
+    V nasprotnem primeru vrne False.
+    Za barvanje uporablja iskanje v širino.
+
+    Časovna zahtevnost: O(m)
+    """
     n = len(G)
     sez = [None] * n
     def visit(u, v):
@@ -58,11 +65,23 @@ def dvodelen(G):
     return sez
 
 def stPoti(G, x, y):
+    """
+    Določi število najkrajših poti od x do y v grafu G.
+
+    Časovna zahtevnost: O(m)
+    """
     n = len(G)
     S = [0] * n
     nivo = [None] * n
     S[x], nivo[x] = 1, 0
     def visit(u, v):
+        """
+        Prišteje število poti do vozlišča u njegovim naslednikom.
+
+        Ustavi iskanje, ko naleti na vozlišče y.
+
+        Časovna zahtevnost: O(d(u))
+        """
         if u == y:
             return False
         for w in G[u]:
