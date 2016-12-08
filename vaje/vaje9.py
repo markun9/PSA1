@@ -42,10 +42,16 @@ def shortestPath(G, s, t, PriorityQueue = BinaryHeap):
     """
     Poišče najkrajšo pot od vozlišča s do vozlišča t.
 
-    Časovna zahtevnost: O(m) sprememb vrednosti v vrsti +
-                        O(n) pobiranj iz vrste
+    Za G sprejme bodisi graf ali pa izhod funkcije dijkstra.
+
+    Časovna zahtevnost za graf na vhodu: O(m) sprememb vrednosti v vrsti +
+                                         O(n) pobiranj iz vrste
+    Časovna zahtevnost za par na vhodu:  O(n)
     """
-    r, p = dijkstra(G, s, t, PriorityQueue = BinaryHeap)
+    if isinstance(G, tuple):
+        r, p = G
+    else:
+        r, p = dijkstra(G, s, t, PriorityQueue = BinaryHeap)
     pot = []
     d = r[t]
     while t is not None:
