@@ -4,7 +4,7 @@ from matrix import AbstractMatrix
 import timeit
 import numpy
 
-class FastMatrix(SlowMatrix):
+class FastMatrix2(SlowMatrix):
     """
     Matrika z množenjem s Strassenovim algoritmom.
     """
@@ -62,13 +62,13 @@ class FastMatrix(SlowMatrix):
             B22 = right[m2//2:m2,l2//2:l2]
 
             #print(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)))
-            M1 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A11 + A22),(B11 + B22)) #rekurzivni klici za množenje posameznih blokov
-            M2 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A21 + A22),B11)
-            M3 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),A11,(B12-B22))
-            M4 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),A22,(B21-B11))
-            M5 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A11 + A12),B22)
-            M6 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A21 - A11),(B11 + B12))
-            M7 = FastMatrix.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A12 - A22),(B21 + B22))
+            M1 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A11 + A22),(B11 + B22)) #rekurzivni klici za množenje posameznih blokov
+            M2 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A21 + A22),B11)
+            M3 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),A11,(B12-B22))
+            M4 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),A22,(B21-B11))
+            M5 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A11 + A12),B22)
+            M6 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A21 - A11),(B11 + B12))
+            M7 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A12 - A22),(B21 + B22))
 
             C11 = M1 + M4 - M5 + M7 #komponente C, dobljene iz sesštevanja M-jev
             C12 = M3 + M5
@@ -108,9 +108,11 @@ F = AbstractMatrix([[0, 0, 0, 0],
 #print(SlowMatrix.multiply(F,A,B))
 #print(FastMatrix.multiply(F,A,B))
 
-T = AbstractMatrix([[1,2,1,0,0,3,3,3,3,3,5],
-                    [2,1,0,1,0,4,5,6,7,8,8],
-                    [1,2,5,3,3,5,5,6,2,7,7]])
+T = AbstractMatrix([[1,2,1,0,0,3,3,3,3,3,5,3,4,5],
+                    [2,1,0,1,0,4,5,6,7,8,8,3,4,5],
+                    [1,2,5,3,3,5,5,6,2,7,7,3,3,7],
+                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,4,5,4],
+                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,3,2,4]])
 S = AbstractMatrix([[2,8,2,0,0,1,2],
                     [1,3,0,1,8,5,2],
                     [0,2,0,1,0,1,2],
@@ -121,10 +123,13 @@ S = AbstractMatrix([[2,8,2,0,0,1,2],
                     [2, 1, 2, 1, 2, 1, 2],
                     [2, 1, 2, 1, 2, 1, 2],
                     [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],])
-U = AbstractMatrix([([0, ] * 7), ] * 3)
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2]])
+U = AbstractMatrix([([0, ] * 7), ] * 5)
 
 print(SlowMatrix.multiply(U,T,S))
-print(FastMatrix.multiply(U,T,S))
+print(FastMatrix2.multiply(U,T,S))
 
 #hitrejša koda, upošteva še sodost, lihost
