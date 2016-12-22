@@ -44,13 +44,11 @@ class FastMatrix2(SlowMatrix):
         else:
             l2 = (l-1)
 
-        print(n2, l2, m2)
         if l==1 or n==1 or m==1: #robni pogoj, ko postane eden od parametrov l,m ali n enak 1. V tem primeru uporabimo naivno množenj
             C = SlowMatrix.multiply(self,left,right)
             return C
         else: #primer, kjer nobena od komponent ni enaka 1
             C = AbstractMatrix([([0, ] * l), ]*n) #velikost ciljne matrike. Moral bi biti self, vendar potem pride narobe.
-            print(m2,n2,l2)
             A11 = left[0:(n2//2),0:(m2//2)] #razdelitev bločnega dela leve matrike na štiri enako veliko matrike
             A12 = left[0:n2//2,(m2//2):m2]
             A21 = left[n2//2:n2,0:m2//2]
@@ -129,7 +127,7 @@ S = AbstractMatrix([[2,8,2,0,0,1,2],
                     [2, 1, 2, 1, 2, 1, 2]])
 U = AbstractMatrix([([0, ] * 7), ] * 5)
 
-print(SlowMatrix.multiply(U,T,S))
-print(FastMatrix2.multiply(U,T,S))
+#print(SlowMatrix.multiply(U,T,S))
+#print(FastMatrix2.multiply(U,T,S))
 
 #hitrejša koda, upošteva še sodost, lihost
