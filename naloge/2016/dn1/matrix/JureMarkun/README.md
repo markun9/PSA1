@@ -51,7 +51,7 @@ To bi v že omenjenem primeru (n,m,l) = (51,23,45) pomenilo 24029.
 
 3.FastMatrix2
 
-Ta verzija FastMatrix je zgolj optimizirana verzija prejšnje. Edina razlika je, da za vrednosti n2,m2,l2, ki so velikosti blokov, ne vzamemo potence števila 2, pač pa največje sode podmatrike. Torej so te vrednosti bodisi n2,m2,l2, ali pa n2-1,m2-1 ali l2-1. To izjemno poveča količino mest v ciljni matriki, ki jih izračunamo z Strassnovim algoritmom. Opisal bom zgolj razlike v primerjavi s prejšnjim fast algoritmom.
+Ta verzija FastMatrix je zgolj optimizirana verzija prejšnje. Edina razlika je, da za vrednosti n2,m2,l2, ki so velikosti blokov, ne vzamemo potence števila 2, pač pa največje sode podmatrike. Torej so te vrednosti bodisi n,m,l, ali pa n-1,m-1 ali l-1. To izjemno poveča količino mest v ciljni matriki, ki jih izračunamo z Strassnovim algoritmom. Opisal bom zgolj razlike v primerjavi s prejšnjim fast algoritmom.
 
 *Prostorska zahtevnost* 
 
@@ -63,4 +63,18 @@ V tem primeru po Strassnovem algoritmu izračunamo vse, razen mogoče zadnje vrs
 Mest, ki štejejo pod zadnjo vrstico ali stolpec je največ n+2m+l. na teh mestih pa za izračun potrebujemo m množenj, torej je zahtevnost tam O(mx(n+2m+l)). 
 
 Skupaj O(max(n2,l2,m2)^(log2(7))) + mx(n+2m+l))
-Za primer  (n,m,l) = (51,23,45) je to 11804, kar je bistvena izboljšava v primerjavi z FastMatrix.
+Za primer  (n,m,l) = (51,23,45) je to 11804, kar je bistvena izboljšava v primerjavi z FastMatrix.4
+
+4.CheapMatrix
+
+Pri Cheap Matrix moramo upoštevati še zahtevo, da algoritem porabi le O(log(lmn)) dodatnega spomina, kar pomeni, da imamo poleg prostora za vhodne matrike prostor samo še za eno "work" matriko velikosti nxl, torej takšne, kot ciljna matrika.
+
+To dosežemo tako, da končno matriko izračunamo kar direktno, brez kakršnihkoli začasnih spremenljivk. To naredi algoritem bolj počasen, saj mora vse prejšnje M-je računati vsakič posebej, vendar porabi zahtevano količino prostora.
+
+*Prostorska zahtevnost*
+
+Prostorska zahtevnost algoritma je O(nm + ml + nl + log(lmn))
+
+*Časovna zahtevnost*
+
+
