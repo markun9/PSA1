@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from slowmatrix import SlowMatrix
-from matrix import AbstractMatrix
+from .slowmatrix import SlowMatrix
+from ..matrix import AbstractMatrix
 import timeit
 import numpy
 
@@ -27,12 +27,11 @@ class FastMatrix(SlowMatrix):
         #   [       ]       [        ]      [       ]
         # n [       ]   * m [        ] =  n [       ]
         #   [       ]       [        ]      [       ]
-        u = 0
+
         n2 = 0
         l2 = 0
         m2 = 0
         while (n2 == 0 or m2 == 0 or l2 == 0): #n2,m2 in l2 predstavljajo največje število, ki je večkratnik 2 in manjše od indeksov n,m in l
-            #print(u)
             if 2**u > n and n2 == 0:
                 n2 = 2**(u-1)
             if 2**u > l and l2 == 0:
