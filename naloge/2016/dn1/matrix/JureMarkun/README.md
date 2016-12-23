@@ -83,23 +83,16 @@ Prostorska zahtevnost algoritma je O(nm + ml + nl + log(lmn))
 
 Če poskusimo izmeriti dejanski čas izvajanja algoritma pri množenju matrik velikosti (n,m,l) = (5,11,7), dobimo naslednje
 
-[  68   48   66   35   80   44   72 ]
-[ 107   70  106   52  110   58  108 ]
-[ 109   84  116   61  121   67  121 ]
-[ 109   71  108   53  112   59  110 ]
-[ 101   67  100   49  104   55  102 ] Slow
-0.002000093460083008 tempus
-[  68   48   66   35   80   44   72 ]
-[ 107   70  106   52  110   58  108 ]
-[ 109   84  116   61  121   67  121 ]
-[ 109   71  108   53  112   59  110 ]
-[ 101   67  100   49  104   55  102 ] Fast2
-0.007000446319580078 tempus
-[  68   48   66   35   80   44   72 ]
-[ 107   70  106   52  110   58  108 ]
-[ 109   84  116   61  121   67  121 ]
-[ 109   71  108   53  112   59  110 ]
-[ 101   67  100   49  104   55  102 ] Cheap
-0.013000726699829102 tempus
+Slow
+
+0.002000093460083008 
+
+Fast2
+
+0.007000446319580078
+
+Cheap
+
+0.013000726699829102 
 
 to je v splošnem presenetljivo, saj je Fast matrika narejena, da bi bila hitrejša od Slow. to bi lahko pojasnili s tem, da pri manjših algoritmih SlowMatrix vseeno deluje hitreje, saj mora FastMatrix izvajati dokaj veliko operacij, pri veliko večjih matrikah pa bi bil čas hitrejši. CheapMatrix je pričakovano počasnejša od obeh.
