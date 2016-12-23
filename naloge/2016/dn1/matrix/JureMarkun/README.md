@@ -69,7 +69,8 @@ Za primer  (n,m,l) = (51,23,45) je to 11804, kar je bistvena izboljšava v prime
 
 Pri Cheap Matrix moramo upoštevati še zahtevo, da algoritem porabi le O(log(lmn)) dodatnega spomina, kar pomeni, da imamo poleg prostora za vhodne matrike prostor samo še za eno "work" matriko velikosti nxl, torej takšne, kot ciljna matrika.
 
-To dosežemo tako, da končno matriko izračunamo kar direktno, brez kakršnihkoli začasnih spremenljivk. To naredi algoritem bolj počasen, saj mora vse prejšnje M-je računati vsakič posebej, vendar porabi zahtevano količino prostora.
+Metoda ne deluje dobro, napisan je le osnutek. Ideja je, da Mi dobimo s tem, da rekurzivno kličemo množenje podmatrik vsot A in B, za ciljno matriko damo eno izmed delov v delovni matriki, drugo pa vzamemo kot novo delovno matriko. To ponavljamo, ter dobimo bločni del, potem pa zunanji del še dopolnemo z števili s počasnega množenja.
+Zunanji del deluje, števila pri bločnem delu pa pridejo prevelika. 
 
 *Prostorska zahtevnost*
 
@@ -77,4 +78,4 @@ Prostorska zahtevnost algoritma je O(nm + ml + nl + log(lmn))
 
 *Časovna zahtevnost*
 
-
+Časovna zahtevnost je večja, kot pri FastMatrix, ker je metoda narejena zgolj za to, da prihrani prostor, pri tem pa izgubi na hitrosti.
