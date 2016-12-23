@@ -2,4 +2,3 @@
 __all__ = ['AbstractMatrix']
 
 from .matrix import AbstractMatrix
-
