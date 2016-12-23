@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from matrix import AbstractMatrix
+from .matrix import AbstractMatrix
+import time
 
 class SlowMatrix(AbstractMatrix):
     """
@@ -39,5 +40,30 @@ E = AbstractMatrix([[0],[0]])
 
 #print(SlowMatrix.multiply(E,C,D))
 
+T = AbstractMatrix([[1, 2, 1, 0, 0, 3, 3, 3, 3, 3, 5, 3, 4, 5],
+                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8, 3, 4, 5],
+                    [1, 2, 5, 3, 3, 5, 5, 6, 2, 7, 7, 3, 3, 7],
+                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8, 4, 5, 4],
+                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8, 3, 2, 4]])
+S = AbstractMatrix([[2, 8, 2, 0, 0, 1, 2],
+                    [1, 3, 0, 1, 8, 5, 2],
+                    [0, 2, 0, 1, 0, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [3, 4, 6, 2, 3, 1, 3],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2],
+                    [2, 1, 2, 1, 2, 1, 2]])
+U = AbstractMatrix([([0, ] * 7), ] * 5)
+
+start = time.time()
+print(SlowMatrix.multiply(U,T,S),"Slow")
+end = time.time()
+print(end - start,"tempus")
 ########################################
 #Ciljna matrika more bit matrika ničel.

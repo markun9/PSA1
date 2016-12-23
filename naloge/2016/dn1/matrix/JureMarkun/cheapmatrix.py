@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
-os.chdir('D:/Programiranje/PSA/neki2/PSA1/naloge/2016/dn1')
+import time
 from slowmatrix import SlowMatrix
 from fastmatrix2 import FastMatrix2 as FastMatrix
 from matrix import AbstractMatrix
@@ -53,7 +52,6 @@ class CheapMatrix(SlowMatrix):
             l2 = (l-1)
 
         if l==1 or n==1 or m==1: #robni pogoj, ko postane eden od parametrov l,m ali n enak 1. V tem primeru uporabimo naivno množenj
-            print("gremo v naivno", self, left, right)
             C = SlowMatrix.multiply(self,left,right)
             return C
         else: #primer, kjer nobena od komponent ni enaka 1
@@ -79,17 +77,14 @@ class CheapMatrix(SlowMatrix):
             #Sedaj bomo vsako Matriko Mi posebej izračunali, saj ne smemo uporabiti seštevanja dveh matrik, tako kot prej, ker to ustvari novo matriko.
 
             #M7
-            print(work)
             CheapMatrix.multiply(W11,(A12 - A22),(B21 + B22),W12)
             W12[0:(n2 // 2), 0:(l2 // 2)] = 0
-            print(work,"11111111")
             self += work
             work[0:n2, 0:l2] = 0
 
             #M6
             CheapMatrix.multiply(W22,(A21 - A11), (B11 + B12),W21)
             W21[:(n2 // 2), 0:(l2 // 2)] = 0
-            print(work,"work222")
             self += work
             work[0:n2, 0:l2] = 0
 
@@ -126,7 +121,6 @@ class CheapMatrix(SlowMatrix):
             self += work
             work[0:n2, 0:l2] = 0
 
-            print(self,"self")
             #odvečni deli, ki niso deli bloka
             #print(n, m,l)
             for n1 in range(n):
@@ -179,4 +173,8 @@ S = AbstractMatrix([[2,8,2,0,0,1,2],
 U = AbstractMatrix([([0, ] * 7), ] * 5)
 
 #print(SlowMatrix.multiply(U,T,S))
-print(CheapMatrix.multiply(U,T,S)==SlowMatrix.multiply(U,T,S))
+
+start = time.time()
+print(CheapMatrix.multiply(U,T,S),"Cheap")
+end = time.time()
+print(end - start,"tempus")
