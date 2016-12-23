@@ -100,8 +100,8 @@ F = AbstractMatrix([[0, 0, 0, 0],
      [0, 0, 0, 0],
      [0, 0, 0, 0],
      [0,0,0,0]])
-print(SlowMatrix.multiply(F,A,B))
-print(FastMatrix.multiply(F,A,B))
+#print(SlowMatrix.multiply(F,A,B))
+#print(FastMatrix.multiply(F,A,B))
 
 T = AbstractMatrix([[1,2,1,0,0,3,3,3,3,3,5],
                     [2,1,0,1,0,4,5,6,7,8,8],

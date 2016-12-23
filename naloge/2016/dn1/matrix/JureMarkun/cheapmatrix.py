@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import time
-from slowmatrix import SlowMatrix
-from fastmatrix2 import FastMatrix2 as FastMatrix
-from matrix import AbstractMatrix
+from .slowmatrix import SlowMatrix
+from .fastmatrix2 import FastMatrix2 as FastMatrix
+from ..matrix import AbstractMatrix
 import timeit
 import numpy
 
@@ -131,50 +131,50 @@ class CheapMatrix(SlowMatrix):
                             self[n1, l1] += left[n1, m1] * right[m1, l1]
             return self
 
-
-
-
-A = AbstractMatrix([[1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16],
-    [3,3,3,3]])
-B = AbstractMatrix([[1, 2, 3, 4],
-     [5, 6, 7, 8],
-     [9, 10, 11, 12],
-     [13, 14, 15, 16]])
-F = AbstractMatrix([[0, 0, 0, 0],
-     [0, 0, 0, 0],
-     [0, 0, 0, 0],
-     [0, 0, 0, 0],
-     [0,0,0,0]])
+#
+#
+#
+# A = AbstractMatrix([[1, 2, 3, 4],
+#     [5, 6, 7, 8],
+#     [9, 10, 11, 12],
+#     [13, 14, 15, 16],
+#     [3,3,3,3]])
+# B = AbstractMatrix([[1, 2, 3, 4],
+#      [5, 6, 7, 8],
+#      [9, 10, 11, 12],
+#      [13, 14, 15, 16]])
+# F = AbstractMatrix([[0, 0, 0, 0],
+#      [0, 0, 0, 0],
+#      [0, 0, 0, 0],
+#      [0, 0, 0, 0],
+#      [0,0,0,0]])
 #print(SlowMatrix.multiply(F,A,B))
 #print(FastMatrix.multiply(F,A,B))
 
-T = AbstractMatrix([[1,2,1,0,0,3,3,3,3,3,5,3,4,5],
-                    [2,1,0,1,0,4,5,6,7,8,8,3,4,5],
-                    [1,2,5,3,3,5,5,6,2,7,7,3,3,7],
-                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,4,5,4],
-                    [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,3,2,4]])
-S = AbstractMatrix([[2,8,2,0,0,1,2],
-                    [1,3,0,1,8,5,2],
-                    [0,2,0,1,0,1,2],
-                    [2,1,2,1,2,1,2],
-                    [3,4,6,2,3,1,3],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2],
-                    [2, 1, 2, 1, 2, 1, 2]])
-U = AbstractMatrix([([0, ] * 7), ] * 5)
+# T = AbstractMatrix([[1,2,1,0,0,3,3,3,3,3,5,3,4,5],
+#                     [2,1,0,1,0,4,5,6,7,8,8,3,4,5],
+#                     [1,2,5,3,3,5,5,6,2,7,7,3,3,7],
+#                     [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,4,5,4],
+#                     [2, 1, 0, 1, 0, 4, 5, 6, 7, 8, 8,3,2,4]])
+# S = AbstractMatrix([[2,8,2,0,0,1,2],
+#                     [1,3,0,1,8,5,2],
+#                     [0,2,0,1,0,1,2],
+#                     [2,1,2,1,2,1,2],
+#                     [3,4,6,2,3,1,3],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2],
+#                     [2, 1, 2, 1, 2, 1, 2]])
+# U = AbstractMatrix([([0, ] * 7), ] * 5)
 
 #print(SlowMatrix.multiply(U,T,S))
 
-start = time.time()
-print(CheapMatrix.multiply(U,T,S),"Cheap")
-end = time.time()
-print(end - start,"tempus")
+#start = time.time()
+#print(CheapMatrix.multiply(U,T,S),"Cheap")
+#end = time.time()
+#print(end - start,"tempus")
