@@ -69,8 +69,7 @@ Za primer  (n,m,l) = (51,23,45) je to 11804, kar je bistvena izboljšava v prime
 
 Pri Cheap Matrix moramo upoštevati še zahtevo, da algoritem porabi le O(log(lmn)) dodatnega spomina, kar pomeni, da imamo poleg prostora za vhodne matrike prostor samo še za eno "work" matriko velikosti nxl, torej takšne, kot ciljna matrika.
 
-Metoda ne deluje dobro, napisan je le osnutek. Ideja je, da Mi dobimo s tem, da rekurzivno kličemo množenje podmatrik vsot A in B, za ciljno matriko damo eno izmed delov v delovni matriki, drugo pa vzamemo kot novo delovno matriko. To ponavljamo, ter dobimo bločni del, potem pa zunanji del še dopolnemo z števili s počasnega množenja.
-Zunanji del deluje, števila pri bločnem delu pa pridejo prevelika. 
+Ideja metode je, da Mi dobimo s tem, da rekurzivno kličemo množenje podmatrik vsot A in B, za ciljno matriko damo eno izmed delov v delovni matriki, drugo pa vzamemo kot novo delovno matriko. To ponavljamo, ter dobimo bločni del, potem pa zunanji del še dopolnemo z števili s počasnega množenja.
 
 *Prostorska zahtevnost*
 
@@ -79,3 +78,28 @@ Prostorska zahtevnost algoritma je O(nm + ml + nl + log(lmn))
 *Časovna zahtevnost*
 
 Časovna zahtevnost je večja, kot pri FastMatrix, ker je metoda narejena zgolj za to, da prihrani prostor, pri tem pa izgubi na hitrosti.
+
+5.Meritve
+
+Če poskusimo izmeriti dejanski čas izvajanja algoritma pri množenju matrik velikosti (n,m,l) = (5,11,7), dobimo naslednje
+
+[  68   48   66   35   80   44   72 ]
+[ 107   70  106   52  110   58  108 ]
+[ 109   84  116   61  121   67  121 ]
+[ 109   71  108   53  112   59  110 ]
+[ 101   67  100   49  104   55  102 ] Slow
+0.002000093460083008 tempus
+[  68   48   66   35   80   44   72 ]
+[ 107   70  106   52  110   58  108 ]
+[ 109   84  116   61  121   67  121 ]
+[ 109   71  108   53  112   59  110 ]
+[ 101   67  100   49  104   55  102 ] Fast2
+0.007000446319580078 tempus
+[  68   48   66   35   80   44   72 ]
+[ 107   70  106   52  110   58  108 ]
+[ 109   84  116   61  121   67  121 ]
+[ 109   71  108   53  112   59  110 ]
+[ 101   67  100   49  104   55  102 ] Cheap
+0.013000726699829102 tempus
+
+to je v splošnem presenetljivo, saj je Fast matrika narejena, da bi bila hitrejša od Slow. to bi lahko pojasnili s tem, da pri manjših algoritmih SlowMatrix vseeno deluje hitreje, saj mora FastMatrix izvajati dokaj veliko operacij, pri veliko večjih matrikah pa bi bil čas hitrejši. CheapMatrix je pričakovano počasnejša od obeh.
