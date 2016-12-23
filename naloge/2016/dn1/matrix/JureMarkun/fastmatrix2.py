@@ -67,6 +67,7 @@ class FastMatrix2(SlowMatrix):
             M5 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A11 + A12),B22)
             M6 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A21 - A11),(B11 + B12))
             M7 = FastMatrix2.multiply(AbstractMatrix([([0, ] * (l2//2)), ] * (n2 // 2)),(A12 - A22),(B21 + B22))
+            print(M7,"M7")
 
             C11 = M1 + M4 - M5 + M7 #komponente C, dobljene iz sesštevanja M-jev
             C12 = M3 + M5
@@ -128,6 +129,6 @@ S = AbstractMatrix([[2,8,2,0,0,1,2],
 U = AbstractMatrix([([0, ] * 7), ] * 5)
 
 #print(SlowMatrix.multiply(U,T,S))
-#print(FastMatrix2.multiply(U,T,S))
+print(FastMatrix2.multiply(U,T,S))
 
 #hitrejša koda, upošteva še sodost, lihost

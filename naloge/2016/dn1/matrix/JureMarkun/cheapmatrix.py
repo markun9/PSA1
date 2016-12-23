@@ -53,7 +53,7 @@ class CheapMatrix(SlowMatrix):
             l2 = (l-1)
 
         if l==1 or n==1 or m==1: #robni pogoj, ko postane eden od parametrov l,m ali n enak 1. V tem primeru uporabimo naivno množenj
-
+            print("gremo v naivno", self, left, right)
             C = SlowMatrix.multiply(self,left,right)
             return C
         else: #primer, kjer nobena od komponent ni enaka 1
@@ -78,44 +78,51 @@ class CheapMatrix(SlowMatrix):
             work[0:work.nrow(), 0:work.ncol()] = 0
             #Sedaj bomo vsako Matriko Mi posebej izračunali, saj ne smemo uporabiti seštevanja dveh matrik, tako kot prej, ker to ustvari novo matriko.
 
+            #M7
+            print(work)
             CheapMatrix.multiply(W11,(A12 - A22),(B21 + B22),W12)
             W12[0:(n2 // 2), 0:(l2 // 2)] = 0
+            print(work,"11111111")
             self += work
             work[0:n2, 0:l2] = 0
 
-            CheapMatrix.multiply(W22,(A21 - A11), (B11 + B22),W21)
+            #M6
+            CheapMatrix.multiply(W22,(A21 - A11), (B11 + B12),W21)
             W21[:(n2 // 2), 0:(l2 // 2)] = 0
+            print(work,"work222")
             self += work
             work[0:n2, 0:l2] = 0
 
 
-
+            #M4
             CheapMatrix.multiply(W11,(A22), (B21 - B11), W21)
             W21[0:(n2 // 2), 0:(l2 // 2)] = W11[0:(n2 // 2), 0:(l2 // 2)]
             self += work
             work[0:n2, 0:l2] = 0
 
+            #M3
             CheapMatrix.multiply(W12,(A11), (B12 - B22), W22)
             W22[0:(n2 // 2), 0:(l2 // 2)] = W12[0:(n2 // 2), 0:(l2 // 2)]
             self += work
             work[0:n2, 0:l2] = 0
 
-
-            CheapMatrix.multiply(W12,(A21 + A22), (B22), W11)
-            W11[0:(n2 // 2), 0:(l2 // 2)] = W12[0:(n2 // 2), 0:(l2 // 2)]
+            #M5
+            CheapMatrix.multiply(W12,(A11 + A12), (B22), W11)
+            W11[0:(n2 // 2), 0:(l2 // 2)] -= W12[0:(n2 // 2), 0:(l2 // 2)]
             self += work
             work[0:n2, 0:l2] = 0
 
-            CheapMatrix.multiply(W21,(A11 + A12),(B11), W22)
-            W22[0:(n2 // 2), 0:(l2 // 2)] = W21[0:(n2 // 2), 0:(l2 // 2)]
+            #M2
+            CheapMatrix.multiply(W21,(A21 + A22),(B11), W22)
+            W22[0:(n2 // 2), 0:(l2 // 2)] -= W21[0:(n2 // 2), 0:(l2 // 2)]
             self += work
             work[0:n2, 0:l2] = 0
 
-
-            CheapMatrix.multiply(W11,(A11 + A22), (B11 + B22), W12)
+            #M1
+            CheapMatrix.multiply(W11,(A11 + A22), (B11 + B22), W22)
             W22[0:(n2 // 2), 0:(l2 // 2)] = W11[0:(n2 // 2), 0:(l2 // 2)]
             W21[0:W21.nrow(), 0:W21.ncol()] = 0
-            W12[0:W21.nrow(), 0:W21.ncol()] = 0
+            W12[0:W12.nrow(), 0:W12.ncol()] = 0
             self += work
             work[0:n2, 0:l2] = 0
 
@@ -172,4 +179,4 @@ S = AbstractMatrix([[2,8,2,0,0,1,2],
 U = AbstractMatrix([([0, ] * 7), ] * 5)
 
 #print(SlowMatrix.multiply(U,T,S))
-print(CheapMatrix.multiply(U,T,S))
+print(CheapMatrix.multiply(U,T,S)==SlowMatrix.multiply(U,T,S))
