@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .slowmatrix import SlowMatrix
-from .matrix import AbstractMatrix
+from ..matrix import AbstractMatrix
 import time
 import numpy
 

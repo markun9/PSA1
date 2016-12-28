@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .matrix import AbstractMatrix
+from ..matrix import AbstractMatrix
 import time
 
 class SlowMatrix(AbstractMatrix):
